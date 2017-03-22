@@ -12,7 +12,8 @@ class LogoutController extends Yaf_Controller_Abstract
         $user = new UserModel();
         $user-> cleanData();
 
-        return false;
+        header("Location: /");
+        exit;
 	}
 }
 
