@@ -36,10 +36,10 @@ class LoginController extends Yaf_Controller_Abstract
 
             $authProvider = $hybridauth->authenticate($provider);
 
-            $user_profile = $authProvider->getUserProfile();
+            $userProfile = $authProvider->getUserProfile();
 
-            if($user_profile && isset($user_profile->identifier)) {
-                $user->addUser($provider, $user_profile->identifier);
+            if($userProfile && isset($userProfile->identifier)) {
+                $user->addUser($provider, $userProfile);
                 header("Location: $done");
                 exit;
             }

@@ -28,7 +28,7 @@ class UserModel
         return false;
     }
 
-    public function addUser($sn, $sid) { //{{{
+    public function addUser($sn, $userProfile) { //{{{
         if (!isset($_SESSION['initialed'])) {
             session_regenerate_id();
             $_SESSION['initialed'] = true;
@@ -36,8 +36,11 @@ class UserModel
 
         $_SESSION['user'] = array(
             "sn" => $sn,
-            "sid" => $sid,
-            "sig" => md5($_SERVER['HTTP_USER_AGENT'].$sid),
+            "sid" => $userProfile->identifier,
+            "sig" => md5($_SERVER['HTTP_USER_AGENT'].$userProfile->identifier),
+            "displayName" => $userProfile->displayName,
+            "photoURL" => $userPorfile->photoURL,
+            "email" => $userProfile->email,
         );
 
     } //}}}
