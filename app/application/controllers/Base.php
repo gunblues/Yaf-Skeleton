@@ -18,6 +18,9 @@ class BaseController extends Yaf_Controller_Abstract
     public static $allow_locale = array("tw");
 
     public function init() { //{{{
+
+        MyUtil::blockBadBot();
+
         $user = new UserModel();
 
         if ($user->isLoggedIn()) {
