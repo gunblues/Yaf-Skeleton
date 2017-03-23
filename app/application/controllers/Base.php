@@ -114,6 +114,5 @@ class BaseController extends Yaf_Controller_Abstract
             $this->display("../login/login"); 
             exit;    
         }
-
     } //}}}
 }
