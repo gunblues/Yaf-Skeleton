@@ -6,7 +6,7 @@
  * @see http://www.php.net/manual/en/class.yaf-controller-abstract.php
  */
 
-class IndexController extends Yaf_Controller_Abstract 
+class IndexController extends BaseController
 {
     public function indexAction() {
 	}
