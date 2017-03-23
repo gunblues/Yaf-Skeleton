@@ -19,10 +19,14 @@ class User
     }
 
     static public function isLoggedIn() { 
+        self::init();
+
         return self::getUserData() !== false;
     }
 
     static public function getUserData() {
+        self::init();
+
         if(isset($_SESSION['user']['sig'])
             && isset($_SESSION['user']['sn'])
             && isset($_SESSION['user']['sid'])
