@@ -9,6 +9,7 @@
 class ErrorController extends Yaf_Controller_Abstract {
 
     public function errorAction($exception) {
+        error_log("exception - " . $exception->getMessage());
 
         /* error occurs */
         switch ($exception->getCode()) {
@@ -19,7 +20,6 @@ class ErrorController extends Yaf_Controller_Abstract {
                 $this->redirect("/");
                 return;
             default :
-                error_log("exception - " . $exception->getMessage());
                 break;
         }
 
