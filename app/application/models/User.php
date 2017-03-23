@@ -39,7 +39,7 @@ class UserModel
             "sid" => $userProfile->identifier,
             "sig" => md5($_SERVER['HTTP_USER_AGENT'].$userProfile->identifier),
             "displayName" => $userProfile->displayName,
-            "photoURL" => $userPorfile->photoURL,
+            "photoURL" => $userProfile->photoURL,
             "email" => $userProfile->email,
         );
 
