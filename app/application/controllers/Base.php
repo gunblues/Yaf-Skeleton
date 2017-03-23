@@ -105,13 +105,15 @@ class BaseController extends Yaf_Controller_Abstract
             $this->display($index);
         }
 
+        Yaf_Dispatcher::getInstance()->disableView();
+
     } //}}}
 
-	function needLogin() { //{{{
+    function needLogin() { //{{{
         if (!User::isLoggedIn()) {
-        	$this->display("../login/login"); 
+            $this->display("../login/login"); 
         }
 
-		exit;	
-	} //}}}
+        exit;    
+    } //}}}
 }
