@@ -137,7 +137,7 @@ class MyUtil {
 	    return true;
 	} //}}}
 
-    static function isBadBot() { //{{{
+    static function blockBadBot() { //{{{
         $bots = array(
             "Sogou web spider",
             "MJ12bot",
