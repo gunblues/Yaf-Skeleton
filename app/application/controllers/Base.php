@@ -87,7 +87,7 @@ class BaseController extends Yaf_Controller_Abstract
             $pjax = $pjax . $this->mobileTemplateName;
         }
 
-        $template = $this->getViewpath() . $pjax;
+        $template = $this->getViewpath() . $pjax . ".phtml";
 
         if (file_exists($template) && !isset($this->getView()->pageContent)) {
             $this->getView()->pageContent = $template;
