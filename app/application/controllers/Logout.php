@@ -9,8 +9,7 @@
 class LogoutController extends Yaf_Controller_Abstract 
 {
     public function indexAction() {
-        $user = new UserModel();
-        $user-> cleanData();
+        User::cleanData();
 
         header("Location: /");
         exit;
