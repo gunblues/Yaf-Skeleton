@@ -1,22 +1,28 @@
 <?php
 
-class UserModel
+class User
 {
-    public function __construct() {
-       session_start();
+	static public $started = false;
+    static public $defaultPhotoURL = "/assets/images/Mike.ico";
+
+    static private function init() {
+        if(self::$started === false) {
+            session_start();
+            self::$started = true;
+        }
     }
 
-    public function cleanData() {
-        if ($this->isLoggedIn()) {
+    static public function cleanData() {
+        if (self::isLoggedIn()) {
             session_destroy();
         }
     }
 
-    public function isLoggedIn() { 
-        return $this->getUserData() !== false;
+    static public function isLoggedIn() { 
+        return self::getUserData() !== false;
     }
 
-    public function getUserData() {
+    static public function getUserData() {
         if(isset($_SESSION['user']['sig'])
             && isset($_SESSION['user']['sn'])
             && isset($_SESSION['user']['sid'])
@@ -28,7 +34,9 @@ class UserModel
         return false;
     }
 
-    public function addUser($sn, $userProfile) { //{{{
+    static public function addUser($sn, $userProfile) { //{{{
+		self::init();
+
         if (!isset($_SESSION['initialed'])) {
             session_regenerate_id();
             $_SESSION['initialed'] = true;
@@ -39,12 +47,19 @@ class UserModel
             "sid" => $userProfile->identifier,
             "sig" => md5($_SERVER['HTTP_USER_AGENT'].$userProfile->identifier),
             "displayName" => $userProfile->displayName,
-            "photoURL" => $userProfile->photoURL,
+            "photoURL" => ($userProfile->photoURL ? $userProfile->photoURL : self::$defaultPhotoURL),
             "email" => $userProfile->email,
         );
 
     } //}}}
 
+    static public function getGuestData() { //{{{
+        return array(
+            "displayName" => "Guest",
+            "photoURL" => self::$defaultPhotoURL,
+            "email" => null,
+        );
+    } //}}}
 }
 
 // vim: expandtab softtabstop=4 tabstop=4 shiftwidth=4 ts=4 sw=4

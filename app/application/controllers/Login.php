@@ -19,8 +19,7 @@ class LoginController extends Yaf_Controller_Abstract
             $done = "/";
         }
 
-        $user = new UserModel();
-        if ($user->isLoggedIn()) {
+        if (User::isLoggedIn()) {
             header("Location: $done");
             exit;
         }
@@ -39,7 +38,7 @@ class LoginController extends Yaf_Controller_Abstract
             $userProfile = $authProvider->getUserProfile();
 
             if($userProfile && isset($userProfile->identifier)) {
-                $user->addUser($provider, $userProfile);
+                User::addUser($provider, $userProfile);
                 header("Location: $done");
                 exit;
             }

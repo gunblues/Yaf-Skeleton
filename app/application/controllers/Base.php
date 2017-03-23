@@ -11,23 +11,14 @@ class BaseController extends Yaf_Controller_Abstract
         
     public $cc = "tw";
     public $mobile = 0;
-    public $para = "";
+    public $parameter = "";
     public $user = null;
     public $mobileTemplateName = "";
 
     public static $allow_locale = array("tw");
 
     public function init() { //{{{
-
         MyUtil::blockBadBot();
-
-        $user = new UserModel();
-
-        if ($user->isLoggedIn()) {
-            $this->user = $user->getUserData();
-        }
-
-        $this->getView()->user = $this->user;
 
         $this->mobile = filter_var($this->getRequest()->getQuery('mobile'), FILTER_VALIDATE_INT);
 
@@ -64,9 +55,17 @@ class BaseController extends Yaf_Controller_Abstract
 
         $this->getView()->cc = $this->cc;
 
-        $this->para = "cc=" . $this->cc . "&m=" . $this->mobile;
+        $this->parameter = "cc=" . $this->cc . "&m=" . $this->mobile;
 
-        $this->getView()->para = $this->para;
+        $this->getView()->parameter = $this->parameter;
+
+        if (User::isLoggedIn()) {
+            $this->user = User::getUserData();
+        } else {
+            $this->user = User::getGuestData();
+        }
+
+        $this->getView()->user = $this->user;
 
     } //}}}
 
@@ -107,4 +106,12 @@ class BaseController extends Yaf_Controller_Abstract
         }
 
     } //}}}
+
+	function needLogin() { //{{{
+        if (!User::isLoggedIn()) {
+        	$this->display("../login/login"); 
+        }
+
+		exit;	
+	} //}}}
 }
