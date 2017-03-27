@@ -1,4 +1,5 @@
-window.MyUtil = (function(){
+window.MyUtil = (function() {
+    "use strict";
     var _self = this;
 
     this.is_touch_device  = function() {
@@ -16,4 +17,5 @@ window.MyUtil = (function(){
     };
 
     return _self;
-}());
+
+}).call(this);
