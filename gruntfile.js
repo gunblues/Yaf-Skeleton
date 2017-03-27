@@ -29,7 +29,6 @@ module.exports = function (grunt) {
                 sub: true,
                 white: true,
                 globals: {
-                    angular: false,
                     jQuery: false,
                     $: false,
                     _: false,
